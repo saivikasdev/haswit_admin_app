@@ -55,14 +55,14 @@ class ProfileCard extends StatelessWidget {
       child: Row(
         children: [
           Image.asset(
-            "assets/images/profile_pic.png",
+            "assets/images/flutter.png",
             height: 38,
           ),
           if (!Responsive.isMobile(context))
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-              child: Text("Angelina Jolie"),
+              child: Text("HASWIT Organization"),
             ),
           Icon(Icons.keyboard_arrow_down),
         ],

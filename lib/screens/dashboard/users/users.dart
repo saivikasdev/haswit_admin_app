@@ -1,12 +1,13 @@
-import 'package:admin/models/RecentFile.dart';
+import 'package:admin/controllers/controller%20constants.dart';
+import 'package:admin/models/demo_users.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../constants.dart';
 
-class RecentFiles extends StatelessWidget {
-  const RecentFiles({
+class users extends StatelessWidget {
+  const users({
     Key? key,
   }) : super(key: key);
 
@@ -22,7 +23,7 @@ class RecentFiles extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Recent Files",
+            "Users",
             style: Theme.of(context).textTheme.subtitle1,
           ),
           SizedBox(
@@ -32,18 +33,24 @@ class RecentFiles extends StatelessWidget {
               minWidth: 600,
               columns: [
                 DataColumn(
-                  label: Text("File Name"),
+                  label: Text("Name"),
                 ),
                 DataColumn(
-                  label: Text("Date"),
+                  label: Text("Phone"),
                 ),
                 DataColumn(
-                  label: Text("Size"),
+                  label: Text("Whatsapp"),
+                ),
+                DataColumn(
+                  label: Text("Gmail"),
+                ),
+                DataColumn(
+                  label: Text("Github"),
                 ),
               ],
               rows: List.generate(
-                demoRecentFiles.length,
-                (index) => recentFileDataRow(demoRecentFiles[index]),
+                users_.length,
+                (index) => recentFileDataRow(users_[index], index),
               ),
             ),
           ),
@@ -53,13 +60,18 @@ class RecentFiles extends StatelessWidget {
   }
 }
 
-DataRow recentFileDataRow(RecentFile fileInfo) {
+DataRow recentFileDataRow(Users fileInfo, index) {
   return DataRow(
+    onSelectChanged: (bool) {
+      INDEX.user_course_index.value = index;
+      print(INDEX.user_course_index.value);
+      print(index);
+    },
     cells: [
       DataCell(
         Row(
           children: [
-            SvgPicture.asset(
+            Image.asset(
               fileInfo.icon!,
               height: 30,
               width: 30,
@@ -71,8 +83,10 @@ DataRow recentFileDataRow(RecentFile fileInfo) {
           ],
         ),
       ),
-      DataCell(Text(fileInfo.date!)),
-      DataCell(Text(fileInfo.size!)),
+      DataCell(Text(fileInfo.phone!)),
+      DataCell(Text(fileInfo.whatsapp!)),
+      DataCell(Text(fileInfo.gmail!)),
+      DataCell(Text(fileInfo.github!)),
     ],
   );
 }
